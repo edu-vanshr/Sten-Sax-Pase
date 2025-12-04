@@ -1,4 +1,4 @@
-import random as rand  # Enda tillåtna biblioteket
+import random as rand  # Gör det möjligt att låta datorn slumpmässigt välja mellan 'sten', 'sax' och 'påse'
 
 # ------------------------- HUVUDFUNKTION -------------------------
 
@@ -46,13 +46,12 @@ def spela_sten_sax_påse():
             print("\nProgrammet avslutas. Tack för att du spelade!")
             break
 
-
 # ------------------------- HJÄLPFUNKTIONER -------------------------
 
 def hälsa_spelare():
     """Frågar efter spelarens namn och hälsar."""
     while True:
-        namn = input("Ange ditt spelarnamn -> ").strip()
+        namn = input("Ange ditt spelarnamn -> ").strip()    # Tar bort eventuella mellanslag
         if namn:
             print(f"Trevligt att träffas {namn}!")
             return namn
@@ -63,7 +62,7 @@ def fråga_antal_omgångar():
     """Frågar spelaren hur många omgångar de vill spela."""
     while True:
         svar = input("Hur många omgångar vill du spela? -> ").strip()
-        if svar.isdigit() and int(svar) > 0:
+        if svar.isdigit() and int(svar) > 0:     # Kontrollera att svaret är positivt heltal
             return int(svar)
         else:
             print("Ogiltigt svar! Skriv ett positivt heltal, t.ex. 3.")
@@ -71,18 +70,19 @@ def fråga_antal_omgångar():
 def spela_en_omgång(spelare_namn, valmöjligheter):
     """Kör en omgång Sten–Sax–Påse."""
     while True:
+        # Spelaren väljer sten, sax eller påse
         spelar_val = input(f"{spelare_namn}, välj mellan Sten, Sax eller Påse -> ").lower()
         if spelar_val in valmöjligheter:
             break
         print("Ogiltigt val! Skriv 'sten', 'sax' eller 'påse'.")
 
-    dator_val = rand.choice(valmöjligheter)
+    dator_val = rand.choice(valmöjligheter)     # Datorn gör ett slumpmässigt val
 
     # Visa bådas val
     print(f"{spelare_namn} valde: {spelar_val}")
     print(f"Datorn valde: {dator_val}")
 
-    # Bestäm vinnare
+    # Bestäm vinnare baserat på reglerna för Sten-Sax-Påse
     if spelar_val == dator_val:
         return "oavgjort"
     elif (spelar_val == "sten" and dator_val == "sax") or \
@@ -98,6 +98,7 @@ def visa_resultat(spelare_namn, poäng_spelare, poäng_dator):
     print(f"{spelare_namn}s poäng: {poäng_spelare}")
     print(f"Datorns poäng: {poäng_dator}")
 
+    # Bestäm vem som vann spelet
     if poäng_spelare > poäng_dator:
         print(f"Grattis {spelare_namn}! Du vann spelet!")
     elif poäng_spelare < poäng_dator:
@@ -116,8 +117,8 @@ def spela_igen():
         else:
             print("Ogiltigt svar! Skriv 'ja' eller 'nej'.")
 
-
-# ------------------------- START -------------------------
+# ------------------------- STARTA SPELET -------------------------
 spela_sten_sax_påse()
+
 
 
